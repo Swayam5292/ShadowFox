@@ -1,40 +1,98 @@
-# 🏠 Boston House Price Prediction
+# 🤖 ShadowFox AI/ML Internship Projects
 
-## 📌 Project Overview
-This project is a beginner-level Machine Learning project that predicts house prices based on various features such as crime rate, number of rooms, and other factors.
+## 📌 Overview
 
-## 🎯 Objective
-To build a regression model that can predict house prices using real-world data.
+This repository contains Machine Learning projects completed as part of the ShadowFox AIML Internship.
+The projects are organized by difficulty level, showcasing progression from beginner to intermediate concepts.
 
-## 🛠️ Technologies Used
-- Python
-- Pandas
-- NumPy
-- Scikit-learn
-- Matplotlib
+---
 
-## ⚙️ Workflow
-1. Data Loading and Exploration  
-2. Handling Missing Values  
-3. Feature Selection  
-4. Train-Test Split  
-5. Model Training using Linear Regression  
-6. Model Evaluation  
+# 🟢 Beginner Level Project
 
-## 📊 Model Performance
-- Mean Squared Error (MSE): 25.01  
-- Root Mean Squared Error (RMSE): ~5  
+## 🏠 House Price Prediction
 
-## 📈 Key Learnings
-- Understanding of regression models  
-- Data preprocessing techniques  
-- Model training and evaluation  
-- Practical implementation of Machine Learning workflow  
+### 🎯 Objective
 
-## 🚀 Future Improvements
-- Try advanced models (Decision Trees, Random Forest)  
-- Feature engineering  
-- Hyperparameter tuning  
+To predict house prices based on features such as crime rate, number of rooms, and other factors.
 
-## 👨‍💻 Author
+### ⚙️ Key Steps
+
+* Data preprocessing
+* Handling missing values
+* Train-test split
+* Linear Regression model
+
+### 📊 Performance
+
+* MSE: ~25
+* RMSE: ~5
+
+### 🧠 Learnings
+
+* Basics of Machine Learning
+* Regression concepts
+* Model evaluation
+
+---
+
+# 🟡 Intermediate Level Project
+
+## 🚗 Car Price Prediction
+
+### 🎯 Objective
+
+To predict car selling prices using various features such as fuel type, transmission, and car age.
+
+### ⚙️ Key Steps
+
+* Data cleaning and preprocessing
+* Feature engineering (Car Age)
+* Encoding categorical variables
+* Model building and comparison
+
+### 🤖 Models Used
+
+* Linear Regression
+* Random Forest Regressor
+
+### 📊 Performance
+
+| Model             | MSE  | RMSE |
+| ----------------- | ---- | ---- |
+| Linear Regression | 3.47 | 1.86 |
+| Random Forest     | 0.97 | 0.98 |
+
+### 🧠 Learnings
+
+* Handling real-world datasets
+* Feature engineering
+* Model comparison
+* Importance of advanced models
+
+---
+
+# 🛠️ Technologies Used
+
+* Python
+* Pandas
+* NumPy
+* Scikit-learn
+* Matplotlib
+
+---
+
+# 🚀 Conclusion
+
+This repository demonstrates a structured learning journey from basic to intermediate Machine Learning concepts, including data preprocessing, model building, and performance improvement.
+
+---
+
+# 👨‍💻 Author
+
 Swayam Kerekar
+
+---
+
+# 📌 Project Status
+
+✅ Completed — ShadowFox AIML Internship Projects
