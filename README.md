@@ -1,98 +1,131 @@
 # 🤖 ShadowFox AI/ML Internship Projects
 
-## 📌 Overview
-
-This repository contains Machine Learning projects completed as part of the ShadowFox AIML Internship.
-The projects are organized by difficulty level, showcasing progression from beginner to intermediate concepts.
+## 📌 Overview  
+This repository showcases Machine Learning projects completed during the ShadowFox AI/ML Internship. It demonstrates a structured progression from beginner to intermediate concepts, covering the complete ML pipeline from data preprocessing to deployment.
 
 ---
 
-# 🟢 Beginner Level Project
+# 🟢 Beginner Level Project  
 
-## 🏠 House Price Prediction
+## 🏠 House Price Prediction  
 
-### 🎯 Objective
+### 🎯 Objective  
+To predict house prices based on features such as crime rate, number of rooms, and other socio-economic factors.
 
-To predict house prices based on features such as crime rate, number of rooms, and other factors.
+### ⚙️ Workflow  
+- Data cleaning and preprocessing  
+- Handling missing values  
+- Feature selection  
+- Train-test split  
+- Model training using Linear Regression  
 
-### ⚙️ Key Steps
+### 🤖 Model Used  
+- Linear Regression  
 
-* Data preprocessing
-* Handling missing values
-* Train-test split
-* Linear Regression model
+### 📊 Performance  
+- **MSE:** ~25  
+- **RMSE:** ~5  
 
-### 📊 Performance
-
-* MSE: ~25
-* RMSE: ~5
-
-### 🧠 Learnings
-
-* Basics of Machine Learning
-* Regression concepts
-* Model evaluation
+### 🧠 Key Learnings  
+- Basics of Machine Learning  
+- Regression techniques  
+- Model evaluation metrics  
+- Working with structured datasets  
 
 ---
 
-# 🟡 Intermediate Level Project
+# 🟡 Intermediate Level Project  
 
-## 🚗 Car Price Prediction
+## 🚗 Car Price Prediction  
 
-### 🎯 Objective
+### 🎯 Objective  
+To predict the selling price of used cars based on features such as fuel type, transmission, showroom price, and car age.
 
-To predict car selling prices using various features such as fuel type, transmission, and car age.
+---
 
-### ⚙️ Key Steps
+## ⚙️ Workflow  
 
-* Data cleaning and preprocessing
-* Feature engineering (Car Age)
-* Encoding categorical variables
-* Model building and comparison
+### 🔹 Data Processing  
+- Data cleaning and preprocessing  
+- Feature engineering (Car Age)  
+- Encoding categorical variables using one-hot encoding  
 
-### 🤖 Models Used
+### 🔹 Exploratory Data Analysis  
+- Correlation heatmap  
+- Feature relationships  
+- Distribution analysis  
 
-* Linear Regression
-* Random Forest Regressor
+### 🔹 Model Development  
+- Train-test split  
+- Model training and evaluation  
+- Model comparison  
 
-### 📊 Performance
+---
+
+## 🤖 Models Used  
+- Linear Regression  
+- Random Forest Regressor (Final Model)
+
+---
+
+## 📊 Performance  
 
 | Model             | MSE  | RMSE |
-| ----------------- | ---- | ---- |
+|------------------|------|------|
 | Linear Regression | 3.47 | 1.86 |
-| Random Forest     | 0.97 | 0.98 |
+| Random Forest     | 0.92 | 0.96 |
 
-### 🧠 Learnings
-
-* Handling real-world datasets
-* Feature engineering
-* Model comparison
-* Importance of advanced models
+👉 Random Forest outperformed Linear Regression significantly due to its ability to capture non-linear relationships.
 
 ---
 
-# 🛠️ Technologies Used
+## 🌐 Deployment  
 
-* Python
-* Pandas
-* NumPy
-* Scikit-learn
-* Matplotlib
+The trained model is deployed as a web application using Flask.
 
----
-
-# 🚀 Conclusion
-
-This repository demonstrates a structured learning journey from basic to intermediate Machine Learning concepts, including data preprocessing, model building, and performance improvement.
+### ✨ Features:
+- User-friendly interface  
+- Real-time predictions  
+- Proper feature encoding  
+- Error handling  
 
 ---
 
-# 👨‍💻 Author
-
-Swayam Kerekar
+## 🧠 Key Learnings  
+- Handling real-world datasets  
+- Feature engineering  
+- Model comparison and optimization  
+- Hyperparameter tuning  
+- End-to-end ML pipeline  
+- Model deployment using Flask  
 
 ---
 
-# 📌 Project Status
+# 🛠️ Technologies Used  
 
-✅ Completed — ShadowFox AIML Internship Projects
+- Python  
+- Pandas  
+- NumPy  
+- Scikit-learn  
+- Matplotlib  
+- Seaborn  
+- Flask  
+
+---
+
+# 🚀 Conclusion  
+
+This repository demonstrates a complete Machine Learning workflow from data preprocessing to model deployment. It highlights the importance of proper data handling, feature engineering, model selection, and real-world application of ML models.
+
+---
+
+# 👨‍💻 Author  
+
+**Swayam Kerekar**
+
+---
+
+# 📌 Project Status  
+
+✅ Completed — ShadowFox AI/ML Internship Projects  
+🚀 Deployment Ready  
