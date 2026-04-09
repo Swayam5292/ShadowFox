@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPredict | AI Car Price Estimator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg-dark: #0f172a;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url('{{ url_for("static", filename="background.png") }}');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .radio-option {
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .radio-option input {
+            display: none;
+        }
+
+        .radio-label {
+            display: block;
+            padding: 10px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .radio-option input:checked + .radio-label {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .predict-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .predict-btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .result-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(192, 132, 252, 0.1));
+        }
+
+        .result-title {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .result-value {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .result-placeholder {
+            opacity: 0.5;
+            font-style: italic;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); opacity: 1; }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+
+        .car-decoration {
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            font-size: 10rem;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Input Form -->
+        <div class="glass-card">
+            <div class="header">
+                <h1>AutoPredict</h1>
+                <p>Enter vehicle details for an instant AI-powered market valuation.</p>
+            </div>
+
+            <form action="/predict" method="post">
+                <div class="form-group">
+                    <label>Current Showroom Price (Lakhs)</label>
+                    <input type="number" step="0.01" name="Present_Price" class="input-field" placeholder="e.g. 5.59" required value="{{ inputs.Present_Price if inputs else '' }}">
+                </div>
+
+                <div class="form-group">
+                    <label>Kilometers Driven</label>
+                    <input type="number" name="Kms_Driven" class="input-field" placeholder="e.g. 20000" required value="{{ inputs.Kms_Driven if inputs else '' }}">
+                </div>
+
+                <div class="grid-form" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label>Owner Count</label>
+                        <select name="Owner" class="input-field">
+                            <option value="0" {{ 'selected' if inputs and inputs.Owner == '0' else '' }}>0 (First Hand)</option>
+                            <option value="1" {{ 'selected' if inputs and inputs.Owner == '1' else '' }}>1</option>
+                            <option value="3" {{ 'selected' if inputs and inputs.Owner == '3' else '' }}>2+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Car Age (Years)</label>
+                        <input type="number" name="Car_Age" class="input-field" placeholder="e.g. 5" required value="{{ inputs.Car_Age if inputs else '' }}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Fuel Type</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" name="Fuel_Type" id="petrol" value="Petrol" {{ 'checked' if not inputs or inputs.Fuel_Type == 'Petrol' else '' }}>
+                            <label for="petrol" class="radio-label">Petrol</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="Fuel_Type" id="diesel" value="Diesel" {{ 'checked' if inputs and inputs.Fuel_Type == 'Diesel' else '' }}>
+                            <label for="diesel" class="radio-label">Diesel</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="Fuel_Type" id="cng" value="CNG" {{ 'checked' if inputs and inputs.Fuel_Type == 'CNG' else '' }}>
+                            <label for="cng" class="radio-label">CNG</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Transmission</label>
+                    <div class="radio-group" style="display: grid; grid-template-columns: 1fr 1fr;">
+                        <div class="radio-option">
+                            <input type="radio" name="Transmission" id="manual" value="Manual" {{ 'checked' if not inputs or inputs.Transmission == 'Manual' else '' }}>
+                            <label for="manual" class="radio-label">Manual</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="Transmission" id="automatic" value="Automatic" {{ 'checked' if inputs and inputs.Transmission == 'Automatic' else '' }}>
+                            <label for="automatic" class="radio-label">Automatic</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Seller Type</label>
+                    <div class="radio-group" style="display: grid; grid-template-columns: 1fr 1fr;">
+                        <div class="radio-option">
+                            <input type="radio" name="Seller_Type" id="dealer" value="Dealer" {{ 'checked' if not inputs or inputs.Seller_Type == 'Dealer' else '' }}>
+                            <label for="dealer" class="radio-label">Dealer</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="Seller_Type" id="individual" value="Individual" {{ 'checked' if inputs and inputs.Seller_Type == 'Individual' else '' }}>
+                            <label for="individual" class="radio-label">Individual</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="predict-btn">Generate Valuation</button>
+            </form>
+        </div>
+
+        <!-- Result Display -->
+        <div class="glass-card result-section">
+            <div class="car-decoration">🏎️</div>
+            <div class="feature-icon">✨</div>
+            
+            {% if prediction_text %}
+                {% if "Error" in prediction_text %}
+                    <div class="result-title" style="color: #ef4444;">Valuation Failed</div>
+                    <div style="color: #ef4444; font-size: 0.9rem;">{{ prediction_text }}</div>
+                {% else %}
+                    <div class="result-title">Estimated Resale Value</div>
+                    <div class="result-value">{{ prediction_text }}</div>
+                    <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">
+                        Based on market trends and vehicle condition.
+                    </p>
+                {% endif %}
+            {% else %}
+                <div class="result-title result-placeholder">Ready to predict</div>
+                <div class="result-value result-placeholder">₹ 0.00</div>
+                <p style="margin-top: 1rem; color: var(--text-muted);">
+                    Fill out the form and click "Generate" to see the magic.
+                </p>
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+</html>
